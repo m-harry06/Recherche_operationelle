@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soutenance - Optimisation de Chargement</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="side-nav">
+        <div class="nav-logo">
+            <img src="logo_isen.jpg" alt="Logo ISEN">
+        </div>
+        <ul>
+            <li><a href="#hero">Accueil</a></li>
+            <li><a href="#part1">1. Sac à Dos</a></li>
+            <li><a href="#part2-online">2. Bin Packing (Online)</a></li>
+            <li><a href="#part2-offline">3. Bin Packing (Offline)</a></li>
+        </ul>
+        <div class="theme-toggle">
+            <input type="checkbox" id="darkmode-toggle" class="darkmode-input" checked>
+            <label for="darkmode-toggle" class="darkmode-label">
+                <i class="fas fa-sun"></i>
+                <i class="fas fa-moon"></i>
+            </label>
+        </div>
+    </nav>
+
+    <div class="main-wrapper">
+
+        <!-- HERO SECTION -->
+        <section id="hero" class="glass-container hero-section">
+            <h1 class="gradient-text">Projet de Recherche Opérationnelle</h1>
+            <p class="subtitle">Projet réalisé par Hector Jodon de Villeroché & Harry MBENGMO</p>
+            <p class="intro-text">
+                Ce projet explore deux problèmes fondamentaux d'optimisation combinatoire :
+                le problème du <strong>Sac à dos (Knapsack)</strong> et le problème de <strong>Bin Packing (1D, 2D,
+                    3D)</strong>.
+            </p>
+            <a href="#part1" class="scroll-down">Commencer la présentation ↓</a>
+        </section>
+
+        <!-- PARTIE 1 : SAC A DOS -->
+        <section id="part1" class="glass-container presentation-section">
+            <h2 class="section-title">Partie 1 : Le Problème du Sac à Dos</h2>
+            <p class="section-desc">
+                Objectif : Remplir un conteneur d'une capacité maximale fixe (ici 0.60 kg) en choisissant les objets qui
+                maximisent l'utilité totale.
+            </p>
+
+            <div class="algo-grid">
+                <!-- Glouton -->
+                <div class="algo-card">
+                    <h3>Algorithme Glouton</h3>
+                    <p>Trie les objets par ratio utilité/masse (Tri Rapide) et les ajoute jusqu'à ce que le sac soit
+                        plein. Très rapide mais pas toujours optimal.</p>
+                    <p><strong>Complexité :</strong> O(N log N)</p>
+                    <button id="btn-glouton" class="run-btn">Lancer Glouton</button>
+                    <div id="res-glouton" class="mini-result"></div>
+                </div>
+
+                <!-- Dynamique -->
+                <div class="algo-card">
+                    <h3>Programmation Dynamique</h3>
+                    <p>Explore toutes les sous-combinaisons via une matrice pour garantir la solution exacte et
+                        optimale.</p>
+                    <p><strong>Complexité :</strong> O(N × W) <span style="font-size: 0.8rem; color: #94a3b8;">(W = Capacité)</span></p>
+                    <button id="btn-dyna" class="run-btn">Lancer Dynamique</button>
+                    <div id="res-dyna" class="mini-result"></div>
+                </div>
+
+                <!-- Génétique -->
+                <div class="algo-card">
+                    <h3>Algorithme Génétique</h3>
+                    <p>Simule l'évolution naturelle (sélection par tournoi, croisement uniforme) sur 1000
+                        générations avec pénalité de dépassement.</p>
+                    <p><strong>Complexité :</strong> O(G × P × N) <span style="font-size: 0.8rem; color: #94a3b8;">(G=Générations, P=Population)</span></p>
+                    <button id="btn-gene" class="run-btn">Lancer Génétique</button>
+                    <div id="res-gene" class="mini-result"></div>
+                </div>
+
+                <!-- Brute Force -->
+                <div class="algo-card">
+                    <h3>Brute Force</h3>
+                    <p>Teste absolument toutes les combinaisons possibles. Garantit la solution optimale mais
+                        inutilisable pour un grand nombre d'objets.</p>
+                    <p><strong>Complexité :</strong> O(2<sup>N</sup>)</p>
+                    <button id="btn-bf" class="run-btn">Lancer Brute Force</button>
+                    <div id="res-bf" class="mini-result"></div>
+                </div>
+
+                <!-- Recuit Simulé -->
+                <div class="algo-card">
+                    <h3>Recuit Simulé</h3>
+                    <p>Méthode méta-heuristique inspirée de la métallurgie. Accepte des mauvaises solutions au début
+                        pour éviter de rester bloqué, puis "refroidit" progressivement.</p>
+                    <p><strong>Complexité :</strong> O(I × N) <span style="font-size: 0.8rem; color: #94a3b8;">(I = Itérations)</span></p>
+                    <button id="btn-rs" class="run-btn">Lancer Recuit Simulé</button>
+                    <div id="res-rs" class="mini-result"></div>
+                </div>
+
+                <!-- Meilleur Choix-->
+                <div class="algo-card">
+                    <h3>Meilleur Choix</h3>
+                    <p>Nous avons choisi comme algorithme pour cette partie du travail <b> l'algorithme génétique</b>
+                        car il teste les meilleures combinaisons possibles pour mettre un maximum d'objets dans le
+                        sac avec la plus grande utilité possible.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : ONLINE -->
+        <section id="part2-online" class="glass-container presentation-section">
+            <h2 class="section-title">Partie 2 : Bin Packing (Mode Online)</h2>
+            <p class="section-desc">
+                Les objets arrivent sur un tapis roulant et doivent être rangés
+                immédiatement, sans connaissance des objets suivants et sans tri préalable. L'objectif est de minimiser
+                le nombre de wagons.
+            </p>
+
+            <div class="demo-block">
+                <h3>1D : Algorithme First-Fit (Longueur)</h3>
+                <p>On parcourt les wagons ouverts pour trouver le premier où l'objet rentre. Sinon, on ouvre un nouveau
+                    wagon.</p>
+                <button id="btn-run-1d" class="run-btn">Lancer Speedrun 1D</button>
+                <div class="results" id="res-1d">
+                    <div class="metric"><span class="label">Temps</span><span class="value" id="time-1d">-- ms</span>
+                    </div>
+                    <div class="metric"><span class="label">Wagons</span><span class="value" id="wagons-1d">--</span>
+                    </div>
+                    <div class="metric"><span class="label">Complexité</span><span class="value"
+                            style="font-size: 1.2rem; padding-top: 10px;">O(N²)</span></div>
+                    <div class="metric"><span class="label">longueur restante du train</span><span class="value"
+                            id="rem-1d">--</span>
+                    </div>
+                </div>
+                <div class="visualization" id="vis-1d"
+                    style="flex-direction: column; overflow-y: auto; justify-content: flex-start; padding: 20px; gap: 10px;">
+                    <p class="placeholder" style="position: static;">Cliquez sur Lancer</p>
+                    <div id="wagons-container-1d" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="demo-block">
+                <h3>2D : Heuristique de Surface Minimale (2.5D)</h3>
+                <p>Gestion des rotations. Les objets fragiles (verre, moteur, etc.) restent droits. Les autres peuvent
+                    pivoter pour minimiser l'empreinte au sol.</p>
+                <button id="btn-run-2d" class="run-btn">Lancer Speedrun 2D</button>
+                <div class="results" id="res-2d">
+                    <div class="metric"><span class="label">Temps</span><span class="value" id="time-2d">-- ms</span>
+                    </div>
+                    <div class="metric"><span class="label">Wagons</span><span class="value" id="wagons-2d">--</span>
+                    </div>
+                    <div class="metric"><span class="label">Complexité</span><span class="value"
+                            style="font-size: 1.2rem; padding-top: 10px;">O(N²)</span></div>
+                    <div class="metric"><span class="label">surface restante du train</span><span class="value"
+                            id="rem-2d">--</span>
+                    </div>
+                </div>
+                <div class="visualization" id="vis-2d"
+                    style="flex-direction: column; justify-content: flex-start; padding: 20px; overflow-y: auto;">
+                    <p class="placeholder" style="position: static;">Cliquez sur Lancer</p>
+                    <div id="wagons-container-2d"
+                        style="display: flex; flex-wrap: wrap; gap: 20px; width: 100%; justify-content: center;"></div>
+                </div>
+            </div>
+
+            <div class="demo-block">
+                <h3>3D : Moteur Guillotine Extrême</h3>
+                <p>Optimisation massive des performances : l'algorithme utilise uniquement des tuples primitifs et un
+                    ramasse-miettes désactivé pour des calculs ultra-rapides.</p>
+                <button id="btn-run-3d" class="run-btn">Lancer Speedrun 3D</button>
+                <div class="results" id="res-3d">
+                    <div class="metric"><span class="label">Temps</span><span class="value" id="time-3d">-- ms</span>
+                    </div>
+                    <div class="metric"><span class="label">Wagons</span><span class="value" id="wagons-3d">--</span>
+                    </div>
+                    <div class="metric"><span class="label">Complexité</span><span class="value"
+                            style="font-size: 1.2rem; padding-top: 10px;">O(N²)</span></div>
+                    <div class="metric"><span class="label">volume restant du train</span><span class="value"
+                            id="rem-3d">--</span>
+                    </div>
+                </div>
+                <div class="visualization" id="vis-3d"
+                    style="flex-direction: column; justify-content: flex-start; padding: 20px; overflow-y: auto; height: 600px;">
+                    <p class="placeholder" style="position: static;">Cliquez sur Lancer</p>
+                    <div id="wagon-controls-3d"
+                        style="display: none; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; justify-content: center; flex-shrink: 0;">
+                    </div>
+                    <div id="container-3d" style="width: 100%; flex-grow: 1;"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PARTIE 2 : OFFLINE -->
+        <section id="part2-offline" class="glass-container presentation-section">
+            <h2 class="section-title">Partie 2 : Bin Packing (Mode Offline)</h2>
+            <p class="section-desc">
+                En mode Offline, nous connaissons l'intégralité des objets à
+                l'avance. Cela permet de les trier (ex: par volume décroissant) ou d'appliquer des méta-heuristiques
+                globales.
+            </p>
+
+            <div class="demo-block">
+                <h3>1D Offline : First-Fit Decreasing (FFD)</h3>
+                <p>Trie tous les objets par longueur décroissante avant de les ranger. Les plus grands objets sont
+                    placés en premier, ce qui réduit considérablement les espaces vides résiduels par rapport au mode
+                    Online.</p>
+                <button id="btn-off-1d" class="run-btn">Démo 1D Offline</button>
+                <div class="results" id="res-off-1d">
+                    <div class="metric"><span class="label">Temps</span><span class="value" id="time-off-1d">--
+                            ms</span></div>
+                    <div class="metric"><span class="label">Wagons</span><span class="value"
+                            id="wagons-off-1d">--</span></div>
+                    <div class="metric"><span class="label">Complexité</span><span class="value"
+                            style="font-size: 1.2rem; padding-top: 10px;">O(N log N) + O(N²)</span></div>
+                    <div class="metric"><span class="label">longueur restante du train</span><span class="value"
+                            id="rem-off-1d">--</span>
+                    </div>
+                </div>
+                <div class="visualization" id="vis-off-1d"
+                    style="flex-direction: column; overflow-y: auto; justify-content: flex-start; padding: 20px; gap: 10px;">
+                    <p class="placeholder" style="position: static;">Cliquez sur Démo</p>
+                    <div id="wagons-container-off-1d" style="width: 100%;"></div>
+                </div>
+            </div>
+
+            <div class="demo-block">
+                <h3>2D Offline : Shelf-Packing Decreasing (Étagères)</h3>
+                <p>Trie d'abord les objets par longueur puis par largeur décroissantes. Les objets sont ensuite rangés
+                    par niveaux (ou étagères) successifs dans chaque wagon pour optimiser massivement l'espace au sol.
+                </p>
+                <button id="btn-off-2d" class="run-btn">Démo 2D Offline</button>
+                <div class="results" id="res-off-2d">
+                    <div class="metric"><span class="label">Temps</span><span class="value" id="time-off-2d">--
+                            ms</span></div>
+                    <div class="metric"><span class="label">Wagons</span><span class="value"
+                            id="wagons-off-2d">--</span></div>
+                    <div class="metric"><span class="label">Complexité</span><span class="value"
+                            style="font-size: 1.2rem; padding-top: 10px;">O(N log N) + O(N²)</span></div>
+                    <div class="metric"><span class="label">surface restante du train</span><span class="value"
+                            id="rem-off-2d">--</span>
+                    </div>
+                </div>
+                <div class="visualization" id="vis-off-2d"
+                    style="flex-direction: column; justify-content: flex-start; padding: 20px; overflow-y: auto;">
+                    <p class="placeholder" style="position: static;">Cliquez sur Démo</p>
+                    <div id="wagons-container-off-2d"
+                        style="display: flex; flex-wrap: wrap; gap: 20px; width: 100%; justify-content: center;"></div>
+                </div>
+            </div>
+
+            <div class="demo-block">
+                <h3>3D Offline : Guillotine Triée par Volume</h3>
+                <p>Connaissant tous les objets à l'avance, l'algorithme les trie par leur dimension maximale puis par
+                    leur volume global décroissant avant de les injecter dans le puissant moteur de découpe 3D
+                    (Guillotine).</p>
+                <button id="btn-off-3d" class="run-btn">Démo 3D Offline</button>
+                <div class="results" id="res-off-3d">
+                    <div class="metric"><span class="label">Temps</span><span class="value" id="time-off-3d">--
+                            ms</span></div>
+                    <div class="metric"><span class="label">Wagons</span><span class="value"
+                            id="wagons-off-3d">--</span></div>
+                    <div class="metric"><span class="label">Complexité</span><span class="value"
+                            style="font-size: 1.2rem; padding-top: 10px;">O(N log N) + O(N²)</span></div>
+                    <div class="metric"><span class="label">volume restant du train</span><span class="value"
+                            id="rem-off-3d">--</span>
+                    </div>
+                </div>
+                <div class="visualization" id="vis-off-3d"
+                    style="flex-direction: column; justify-content: flex-start; padding: 20px; overflow-y: auto; height: 600px;">
+                    <p class="placeholder" style="position: static;">Cliquez sur Démo</p>
+                    <div id="wagon-controls-off-3d"
+                        style="display: none; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; justify-content: center; flex-shrink: 0;">
+                    </div>
+                    <div id="container-off-3d" style="width: 100%; flex-grow: 1;"></div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>Projet de Recherche Opérationnelle - 2026</p>
+            <p>Copyright &copy; ISEN A3.</p>
+        </footer>
+
+    </div>
+
+    <!-- Scripts CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>

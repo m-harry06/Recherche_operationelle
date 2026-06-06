@@ -1,0 +1,33 @@
+﻿Jodon de Villeroché Hector
+Harry MBENGMO
+
+Sac à dos
+Algo Glouton :
+L'algorithme Glouton est une heuristique rapide qui cherche à obtenir la meilleure "rentabilité" possible. Pour résoudre le problème du sac à dos, il calcule d'abord le ratio Utilité / Masse de chaque objet. Ensuite, il effectue un tri rapide (QuickSort) pour classer tous les objets du plus rentable au moins rentable. Enfin, il remplit le sac en ajoutant les objets un par un dans cet ordre, et s'arrête dès que la capacité maximale est atteinte ou dépassée. Bien que cette approche ne garantisse pas mathématiquement la solution parfaite absolue (car on ne teste pas les combinaisons complexes), elle a l'avantage de trouver une excellente solution en un temps d'exécution quasi-instantané par rapport à une recherche systématique.
+TailleC = 0.6C = 2C = 3C = 4C = 5Utilité totale6.6014.7517.4519.7521.75Temps1.29 ms 0.95 ms0.87 ms~ 1.05 ms~ 0.85 ms
+Algo Brute Force :
+Le brute force est une méthode qui teste mathématiquement toutes les combinaisons possibles de rangement et de rotation pour chaque objet jusqu'à trouver l'agencement absolument parfait. Son avantage unique est la garantie absolue de trouver la solution 100 % optimale qui utilise le moins de wagons possible. En revanche, son inconvénient majeur est qu'il demande un temps de calcul astronomique : dès que le nombre d'objets augmente, le nombre de possibilités explose et l'ordinateur peut mettre des jours, voire des années, à donner le résultat.
+TailleC=0.6C=2C=3C=4C=5Utilité7.615.0517.8519.9522.0Temps25.53 s28.52 s31.31 s30.12 s29.23 s
+Algo Recuit Simulé : 
+Le recuit simulé est une méthode inspirée de la métallurgie qui cherche le meilleur rangement en imitant le refroidissement d'un métal. Au début (à haute température), l'ordinateur range les objets de façon presque aléatoire et accepte de mauvaises configurations pour explorer toutes les possibilités. Puis, à mesure que l'algorithme "refroidit", il devient plus strict et peaufine le placement des objets.
+
+TailleC=0.6C=2C=3C=4C=5Utilité7.614.517.6519.8522.0Temps0.01 s0.01 s0.01 s0.02 s0.01 s
+Algo Dynamique
+La Programmation Dynamique est une méthode dite "exacte" car elle garantit de trouver la solution mathématique absolument parfaite. Elle fonctionne en décomposant le problème du sac à dos en une multitude de sous-problèmes (toutes les capacités possibles de 0 jusqu'à la capacité cible C). L'algorithme construit une grande matrice (un tableau) où il mémorise systématiquement les meilleurs résultats : pour chaque objet, il compare la meilleure utilité possible sans l'objet, avec la meilleure utilité possible en incluant l'objet dans l'espace restant. Contrairement au glouton, il évalue toutes les combinaisons prometteuses. En contrepartie, son temps de calcul (et sa consommation mémoire) est directement proportionnel à la capacité du sac (on appelle cela une complexité pseudo-polynomiale) : plus le sac est grand, plus la matrice à remplir est vaste, et plus l'algorithme prend du temps.
+
+TailleC = 0.6C = 2C = 3C = 4C = 5Utilité totale7.6015.0517.8519.9522.00Temps~ 1.23 ms~ 2.28 ms~ 3.89 ms~ 3.67 ms~ 3.93 ms
+
+Algo génétique 
+L'algorithme Génétique est une heuristique fascinante inspirée par la théorie de l'évolution de Darwin. Au lieu de construire un sac méthodiquement, il crée d'abord une "population" de centaines de sacs remplis totalement au hasard. Il évalue ensuite leur score (en appliquant une forte pénalité "mortelle" à ceux qui dépassent le poids autorisé). Les meilleurs sacs survivent et sont sélectionnés pour se "reproduire" (on mélange le contenu de deux bons sacs pour créer des enfants) et subissent parfois des "mutations" (on ajoute ou retire un objet au hasard pour tester de nouvelles choses). En répétant ce cycle de sélection naturelle sur des milliers de générations, la population évolue et les sacs deviennent de plus en plus optimisés. C'est une méthode extrêmement puissante pour s'approcher de l'optimum parfait sur des problèmes géants.
+
+TailleC = 0.6C = 2C = 3C = 4C = 5Utilité totale7.6015.0517.8519.9522.00Temps~ 3908 ~ 3886 ms ~ 3828 ms ~ 4407 ms ~ 4321 ms 
+Train
+Offline :
+La méthode offline (ou hors-ligne) signifie que l'ordinateur possède la liste complète de tous les objets à ranger avant de commencer le chargement. Cela lui permet d'avoir une vision globale pour analyser les données et trier stratégiquement les objets (par exemple, du plus grand au plus petit) afin d'optimiser l'espace. Son avantage unique est qu'elle offre une efficacité de rangement bien supérieure, car placer les pièces les plus complexes en premier évite les blocages à la fin. En revanche, son inconvénient unique est sa rigidité totale face à l'imprévu : si un nouvel objet arrive au dernier moment sur le quai, l'algorithme ne peut pas l'adapter à la volée et oblige à recalculer tout le plan de chargement depuis le départ. 
+
+Dimension1D2D3DNombre de Wagons443019 Temps0 s0 s0.02 s
+
+Online 
+La méthode Online(en ligne) est une stratégie de placement en temps réel où les objets sont traités et rangés un par un, strictement dans leur ordre d'arrivée, sans aucune connaissance des objets à venir et sans possibilité de les trier préalablement. Cette contrainte imite des situations réelles (comme le chargement de conteneurs au fur et à mesure de leur arrivée par camions) et oblige l'algorithme à prendre des décisions immédiates et irréversibles via des heuristiques (comme le First-Fit ou la découpe Guillotine). Bien que cette méthode soit extrêmement rapide et s'adapte aux flux continus, elle est par nature moins optimale en termes de gain d'espace qu'une méthode "Offline" (où l'on connaît tous les objets à l'avance pour pouvoir les trier du plus volumineux au plus petit).
+
+Dimension1D2D3DNombre de Wagons452821Temps2.70 ms3.66 ms4.97 s
